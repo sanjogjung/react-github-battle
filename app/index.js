@@ -1,5 +1,7 @@
 import React from 'react'
 import { createRoot } from 'react-dom/client';
+import Battle from './components/Battle';
+import Popular from './components/Popular';
 import './index.css'
 
 function isAuthed () {
@@ -16,9 +18,10 @@ function showWarning () {
 class App extends React.Component {
     render() {
       return (
-          <h1>
-              First Component
-          </h1>
+          <div className='container'>
+              <Battle />
+            {/* <Popular /> */}
+          </div>
       )
         
     }

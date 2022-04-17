@@ -4,85 +4,29 @@ import { FaCompass, FaUser, FaBriefcase, FaUserFriends, FaCode, FaUsers} from 'r
 import Card from './Card'
 import PropTypes from 'prop-types'
 import Loading from './Loading'
+import ToolTip from './ToolTip'
 
-const styles = {
-    container: {
-      position: 'relative',
-      display: 'flex'
-    },
-    tooltip: {
-      boxSizing: 'border-box',
-      position: 'absolute',
-      width: '160px',
-      bottom: '100%',
-      left: '50%',
-      marginLeft: '-80px',
-      borderRadius: '3px',
-      backgroundColor: 'hsla(0, 0%, 20%, 0.9)',
-      padding: '7px',
-      marginBottom: '5px',
-      color: '#fff',
-      textAlign: 'center',
-      fontSize: '14px',
-    }
-  }
-
-class ProfileList extends React.Component {
-    constructor(props) {
-        super(props)
-
-        this.state = {
-            hoveringLocation: false,
-            hoveringCompany: false
-        }
-
-        this.mouseOver = this.mouseOver.bind(this)
-        this.mouseOut = this.mouseOut.bind(this)
-    }
-
-    mouseOver(id){
-        console.log('inside')
-        this.setState({
-            [id]:true
-        })
-    }
-
-    mouseOut(id){
-        console.log('out')
-        this.setState({
-            [id]: false
-        })
-
-    }
-    render(){
-        const { hoveringCompany, hoveringLocation } = this.state
-        const { profile } = this.props
-        return (
-            <ul className='card-list'>
+function ProfileList ({ profile }) {
+    return (
+        <ul className='card-list'>
                 <li>
                     <FaUser color="rgb(239, 115,115)" size={22} />
                         {profile.name}
                 </li>
                 {profile.location && (
-                    <li 
-                        onMouseOver={()=> this.mouseOver("hoveringLocation")}
-                        onMouseOut={()=> this.mouseOut("hoveringLocation")}
-                        style={styles.container}
-                        >
-                        {hoveringLocation === true && <div style={styles.tooltip}>User's location</div>}
-                        <FaCompass color="rgb(144, 115, 255)" size={22}/>
+                    <li>
+                        <ToolTip text="User's location">
+                        <   FaCompass color="rgb(144, 115, 255)" size={22}/>
                             {profile.location}
+                        </ToolTip>
                     </li>
                 )}
                 {profile.company && (
-                    <li
-                    onMouseOver={()=> this.mouseOver("hoveringCompany")}
-                    onMouseOut={()=> this.mouseOut("hoveringCompany")}
-                    style={styles.container}
-                    >
-                        {hoveringCompany === true && <div style={styles.tooltip}>User's company</div>}
-                        <FaBriefcase color="#795448" size={22}/>
-                        {profile.company}
+                    <li>
+                        <ToolTip text="User's company">
+                            <FaBriefcase color="#795448" size={22}/>
+                            {profile.company}
+                        </ToolTip>
                     </li>
                 )}
                 <li>
@@ -95,12 +39,8 @@ class ProfileList extends React.Component {
                 </li>
 
         </ul>
-
-        )
-    }
+    )
 }
-
-
 
 ProfileList.propTypes = {
     profile: PropTypes.object.isRequired

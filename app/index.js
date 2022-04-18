@@ -3,25 +3,35 @@ import { createRoot } from 'react-dom/client';
 import Battle from './components/Battle';
 import Popular from './components/Popular';
 import './index.css'
+import { ThemeProvider, ThemeConsumer } from './contexts/theme'
+import Nav from './components/Nav';
 
-function isAuthed () {
-    return true
-}
 
-function isNew () {
-    return false
-}
-
-function showWarning () {
-    return true
-}
 class App extends React.Component {
+
+    constructor(props) {
+        super(props)
+        this.state = {
+            theme: 'light',
+            toggleTheme: ()=> {
+                this.setState(({ theme }) => ({
+                   theme: theme === 'light' ? "dark": "light"
+                }))
+            }
+        }
+    }
+
     render() {
       return (
-          <div className='container'>
+        <ThemeProvider value={this.state}>
+          <div className={this.state.theme}>
+            <div className='container'>
+              <Nav />
               <Battle />
-            {/* <Popular /> */}
+            </div>
           </div>
+        </ThemeProvider>
+
       )
         
     }

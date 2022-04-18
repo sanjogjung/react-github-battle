@@ -44,6 +44,10 @@ li {
     color: inherit;
 }
 
+.nav li {
+    margin-right: 10px;
+}
+
 .grid {
     display: flex;
     flex-wrap: wrap;
@@ -53,6 +57,9 @@ li {
     justify-content: space-around;
 }
 
+.space-between {
+    justify-content: space-between;
+}
 .header-lg {
     font-size: 35px;
     font-weight: 300;

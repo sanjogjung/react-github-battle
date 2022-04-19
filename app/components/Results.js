@@ -49,16 +49,14 @@ ProfileList.propTypes = {
 }
 
 export default class Results extends Component {
-    constructor(props) {
-        super(props)
-        this.state = {
+        state = {
             winner: null,
             loser: null,
             error: null,
             loading: true
 
         }
-    }
+    
     componentDidMount () {
         const { playerOne, playerTwo } = queryString.parse(this.props.location.search)
         battle([playerOne, playerTwo])
